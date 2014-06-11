@@ -119,7 +119,7 @@ class FFMpegAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
      * @param string $service
      * @dataProvider providerValidFFMpegService
      */
-    public function testValidLoggerService($service)
+    public function testValidFFMpegService($service)
     {
         $actual = $this->services->get($service);
         $this->assertInstanceOf('FFMpeg\FFMpeg', $actual);
@@ -130,7 +130,7 @@ class FFMpegAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
      * @dataProvider providerInvalidFFMpegService
      * @expectedException \Zend\ServiceManager\Exception\ServiceNotFoundException
      */
-    public function testInvalidLoggerService($service)
+    public function testInvalidFFMpegService($service)
     {
         $this->services->get($service);
     }
