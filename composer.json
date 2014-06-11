@@ -1,0 +1,33 @@
+{
+    "name": "bnp/bnp-ffmpeg-module",
+    "description": "This module provides a simple wrapper for the PHP_FFmpeg library, exposing the library as a service",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2"
+    ],
+    "authors": [
+        {
+            "name": "Denis Mostovoi",
+            "email": "buonaparte89@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.3",
+        "php-ffmpeg/php-ffmpeg": "0.4.*@dev",
+        "zendframework/zend-loader": "~2.1",
+        "zendframework/zend-modulemanager": "~2.1",
+        "zendframework/zend-mvc": "~2.1",
+        "zendframework/zend-servicemanager": "~2.1",
+        "zendframework/zend-stdlib": "~2.1"
+    },
+    "require-dev" : {
+        "phpunit/phpunit" : ">=3.7,<4"
+    },
+    "autoload": {
+        "psr-0": {
+            "BnpFFMpegModule": "src/"
+        }
+    }
+}
