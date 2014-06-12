@@ -1,6 +1,6 @@
 {
-    "name": "bnp/bnp-ffmpeg-module",
-    "description": "This module provides a simple wrapper for the PHP_FFmpeg library, exposing the library as a service",
+    "name": "buonaparte/bnp-ffmpeg-module",
+    "description": "This module provides a simple wrapper for the PHP_FFmpeg library, exposing the library as a Zend Framework service",
     "type": "library",
     "license": "BSD-3-Clause",
     "keywords": [

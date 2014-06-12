@@ -12,7 +12,7 @@ Installation
 
     ``` json
     "require": {
-        "buonaparte/BnpFFMpegModule": "dev-master"
+        "buonaparte/bnp-ffmpeg-module": "dev-master"
     }
     ```
 
