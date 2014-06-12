@@ -10,32 +10,32 @@ Installation
 ### Setup
 1. Add this project to your composer.json:
 
-    ```json
-    "require": {
-        "buonaparte/BnpFFMpegModule": "dev-master"
-    }
-    ```
+``` json
+"require": {
+    "buonaparte/BnpFFMpegModule": "dev-master"
+}
+```
 
 2. Now tell composer to download BnpFFMpegModule by running the command:
 
-    ```bash
-    $ php composer.phar update
-    ```
+``` bash
+$ php composer.phar update
+```
 
 ### Post installation
 
 Enabling it in your `application.config.php`file.
 
-    ```php
-    <?php
-    return array(
-        'modules' => array(
-            // ...
-            'BnpFFMpegModule',
-        ),
+``` php
+<?php
+return array(
+    'modules' => array(
         // ...
-    );
-    ```
+        'BnpFFMpegModule',
+    ),
+    // ...
+);
+```
 
 
 Configuration
