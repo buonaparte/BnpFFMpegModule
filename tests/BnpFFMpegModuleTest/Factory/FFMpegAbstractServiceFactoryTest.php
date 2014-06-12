@@ -115,6 +115,45 @@ class FFMpegAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($logger, $secondLogger);
     }
 
+    public function testAllowsMultipleInstancesWithSameFFProbeConfig()
+    {
+        $allowOverride = $this->services->getAllowOverride();
+        $this->services->setAllowOverride(true);
+        $this->services->setService('Config', array_merge_recursive(
+            $this->services->get('Config'),
+            array(
+                'bnp-ffmpeg-module' => array(
+                    'ffmpeg' => array(
+                        'FFMpeg\MultiThreaded' => array(
+                            'ffprobe' => 'ffprobe_service'
+                        ),
+                        'FFMpeg\SingleThreaded' => array(
+                            'ffprobe' => 'ffprobe_service'
+                        ),
+                    ),
+                    'ffprobe' => array(
+                        'configuration' => array(
+                            'timeout' => 4242
+                        )
+                    )
+                )
+            )
+        ));
+        $this->services->setAllowOverride($allowOverride);
+
+        $this->services->setFactory('ffprobe_service', 'BnpFFMpegModule\Factory\FFProbeServiceFactory');
+
+
+        /** @var $single FFMpeg */
+        $single = $this->services->get('FFMpeg\SingleThreaded');
+        /** @var $multi FFMpeg */
+        $multi = $this->services->get('FFMpeg\MultiThreaded');
+
+        $this->assertEquals(4242, $single->getFFProbe()->getFFProbeDriver()->getProcessBuilderFactory()->getTimeout());
+        $this->assertEquals(4242, $multi->getFFProbe()->getFFProbeDriver()->getProcessBuilderFactory()->getTimeout());
+        $this->assertSame($single->getFFProbe(), $multi->getFFProbe());
+    }
+
     /**
      * @param string $service
      * @dataProvider providerValidFFMpegService

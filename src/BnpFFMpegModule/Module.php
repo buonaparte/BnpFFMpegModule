@@ -1,7 +1,19 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: denis
- * Date: 11/06/14
- * Time: 12:07
- */ 
+
+namespace BnpFFMpegModule;
+
+use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
+
+class Module implements AutoloaderProviderInterface
+{
+    public function getAutoloaderConfig()
+    {
+        return array(
+            'Zend\Loader\StandardAutoloader' => array(
+                'namespaces' => array(
+                    __NAMESPACE__ => __DIR__,
+                ),
+            ),
+        );
+    }
+}

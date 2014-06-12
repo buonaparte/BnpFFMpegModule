@@ -55,11 +55,15 @@ class FFProbeServiceFactory implements FactoryInterface
             $config['configuration'] = array();
         }
 
+        $config['configuration'] = array_merge($this->getDefaultConfig(), $config['configuration']);
+
         if (isset($config['logger']) && $services->has($config['logger'])) {
             $config['logger'] = $services->get($config['logger']);
             if (!$config['logger'] instanceof LoggerInterface) {
                 $config['logger'] = null;
             }
+        } else {
+            $config['logger'] = null;
         }
 
         if (isset($config['cache']) && $services->has($config['cache'])) {
@@ -67,6 +71,16 @@ class FFProbeServiceFactory implements FactoryInterface
             if (!$config['cache'] instanceof Cache) {
                 $config['cache'] = null;
             }
+        } else {
+            $config['cache'] = null;
         }
+    }
+
+    protected function getDefaultConfig()
+    {
+        return array(
+            'timeout' => 30,
+            'ffprobe.binaries' => array('avprobe', 'ffprobe'),
+        );
     }
 }

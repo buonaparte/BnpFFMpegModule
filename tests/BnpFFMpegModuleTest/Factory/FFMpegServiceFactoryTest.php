@@ -58,6 +58,30 @@ class FFMpegServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(10666, $ffmpeg->getFFMpegDriver()->getProcessBuilderFactory()->getTimeout());
     }
 
+    public function testWithFFProbeConfig()
+    {
+        $this->services->setService('Config', array(
+            'bnp-ffmpeg-module' => array(
+                'ffmpeg' => array(
+                    'ffprobe' => 'ffprobe_service'
+                ),
+                'ffprobe' => array(
+                    'configuration' => array(
+                        'timeout' => 4242
+                    )
+                )
+            )
+        ));
+        $this->services->setFactory('ffprobe_service', 'BnpFFMpegModule\Factory\FFProbeServiceFactory');
+
+        /** @var $ffmpeg FFMpeg */
+        $ffmpeg = $this->services->get('ffmpeg');
+
+        $this->assertInstanceOf('FFMpeg\FFMpeg', $ffmpeg);
+        $this->assertInstanceOf('FFMpeg\FFProbe', $ffmpeg->getFFProbe());
+        $this->assertEquals(4242, $ffmpeg->getFFProbe()->getFFProbeDriver()->getProcessBuilderFactory()->getTimeout());
+    }
+
     /**
      * @expectedException \Zend\ServiceManager\Exception\ServiceNotCreatedException
      */
@@ -120,6 +144,22 @@ class FFMpegServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Monolog\Logger', $ffmpeg->getFFMpegDriver()->getProcessRunner()->getLogger());
     }
 
+    public function testSilentPassesNotExistingLoggerConfig()
+    {
+        $this->services->setService('Config', array(
+            'bnp-ffmpeg-module' => array(
+                'ffmpeg' => array(
+                    'logger' => 'unknown_logger'
+                )
+            ),
+            'log' => array()
+        ));
+
+        /** @var $ffmpeg FFMpeg */
+        $ffmpeg = $this->services->get('ffmpeg');
+        $this->assertInstanceOf('Monolog\Logger', $ffmpeg->getFFMpegDriver()->getProcessRunner()->getLogger());
+    }
+
     public function testSilentPassesInvalidFFProbeConfig()
     {
         $this->services->setService('Config', array(
@@ -127,10 +167,24 @@ class FFMpegServiceFactoryTest extends \PHPUnit_Framework_TestCase
                 'ffmpeg' => array(
                     'ffprobe' => 'invalid_ffprobe'
                 )
-            ),
-            'log' => array()
+            )
         ));
         $this->services->setService('invalid_ffprobe', new \stdClass());
+
+        /** @var $ffmpeg FFMpeg */
+        $ffmpeg = $this->services->get('ffmpeg');
+        $this->assertInstanceOf('FFMpeg\FFProbe', $ffmpeg->getFFProbe());
+    }
+
+    public function testSilentPassesNotExistingFFProbeConfig()
+    {
+        $this->services->setService('Config', array(
+            'bnp-ffmpeg-module' => array(
+                'ffmpeg' => array(
+                    'ffprobe' => 'unknown_ffprobe'
+                )
+            )
+        ));
 
         /** @var $ffmpeg FFMpeg */
         $ffmpeg = $this->services->get('ffmpeg');
