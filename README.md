@@ -1,6 +1,9 @@
 BnpFFMpegModule
 ===============
 
+[![Build Status](https://travis-ci.org/buonaparte/BnpFFMpegModule.svg?branch=master)](https://travis-ci.org/buonaparte/BnpFFMpegModule)
+[![Coverage Status](https://img.shields.io/coveralls/buonaparte/BnpFFMpegModule.svg)](https://coveralls.io/r/buonaparte/BnpFFMpegModule?branch=master)
+
 This module provides a simple wrapper for the [PHP_FFmpeg](https://github.com/alchemy-fr/PHP-FFmpeg) library,
 exposing the library as a ZendFramework service.
 
