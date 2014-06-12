@@ -90,7 +90,7 @@ Usage
 -----
 
 ```php
-	$ffmpeg = $this->get('FFMpeg');
+	$ffmpeg = $serviceLocator->get('FFMpeg');
 
 	// Open video
 	$video = $ffmpeg->open('/your/source/folder/input.avi');
