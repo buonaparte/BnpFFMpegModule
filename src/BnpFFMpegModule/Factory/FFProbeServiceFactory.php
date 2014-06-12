@@ -34,7 +34,8 @@ class FFProbeServiceFactory implements FactoryInterface
         return FFProbe::create($config['configuration'], $config['logger'], $config['cache']);
     }
 
-    protected function getConfig(ServiceLocatorInterface $services) {
+    protected function getConfig(ServiceLocatorInterface $services)
+    {
         if (null !== $this->config) {
             return $this->config;
         }
