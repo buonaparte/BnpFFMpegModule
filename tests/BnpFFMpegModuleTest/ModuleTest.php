@@ -39,6 +39,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('BnpFFMpegModule', $autoloadConfig);
         $this->assertEquals(
             basename(__DIR__.'/../../src/BnpFFMpegModule'),
-            basename($autoloadConfig['BnpFFMpegModule']));
+            basename($autoloadConfig['BnpFFMpegModule'])
+        );
     }
 }
