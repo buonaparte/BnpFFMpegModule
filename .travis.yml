@@ -12,11 +12,10 @@ before_script:
   - sudo apt-get install -y ffmpeg libavcodec-extra-53
   - composer self-update
   - composer install --dev --prefer-source;
-  - wget https://scrutinizer-ci.com/ocular.phar
 
 script:
   - ./vendor/bin/phpunit --bootstrap=tests/bootstrap.php
   - ./vendor/bin/phpcs -n --standard=PSR2 ./src/ ./tests/
 
 after_script:
-  - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
+  - php vendor/bin/coveralls
