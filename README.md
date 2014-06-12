@@ -4,6 +4,40 @@ BnpFFMpegModule
 This module provides a simple wrapper for the [PHP_FFmpeg](https://github.com/alchemy-fr/PHP-FFmpeg) library,
 exposing the library as a ZendFramework service.
 
+Installation
+------------
+
+### Setup
+1. Add this project to your composer.json:
+
+    ```json
+    "require": {
+        "buonaparte/BnpFFMpegModule": "dev-master"
+    }
+    ```
+
+2. Now tell composer to download BnpFFMpegModule by running the command:
+
+    ```bash
+    $ php composer.phar update
+    ```
+
+### Post installation
+
+Enabling it in your `application.config.php`file.
+
+    ```php
+    <?php
+    return array(
+        'modules' => array(
+            // ...
+            'BnpFFMpegModule',
+        ),
+        // ...
+    );
+    ```
+
+
 Configuration
 -------------
 
